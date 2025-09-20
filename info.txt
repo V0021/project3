@@ -1,0 +1,71 @@
+1. Introduction
+With the rapid growth of digital communication, ensuring secure transmission of sensitive data has become a crucial challenge. While cryptography hides the content of a message, steganography goes a step further by hiding the very existence of the message itself.
+
+This project focuses on Image Steganography using the Least Significant Bit (LSB) technique to embed secret data into a BMP image and later retrieve it safely.
+
+The project implements two main functionalities:
+1. Encoding – Hiding secret file data inside an image.
+2. Decoding – Extracting the hidden secret file from the stego-image.
+
+2. Objectives
+- To develop a C-based program that can hide any type of file (e.g., .txt, .pdf, .c, etc.) inside a BMP image.
+- To ensure the hidden data remains invisible to the human eye while maintaining the image’s visual quality.
+- To implement a magic string verification that ensures only intended secret files are decoded.
+- To gain hands-on experience with file handling, bit manipulation, and structured programming in C.
+
+3. Methodology
+1. Encoding Process:
+- Input Files: Source BMP image, Secret file, Output stego-image name
+- Steps: Copy BMP header, Embed magic string & its length, Embed file extension & its length, Embed file size, Embed secret data byte by byte, Copy remaining image data.
+- Result: A new stego image is generated, visually identical to the original but containing hidden data.
+
+2. Decoding Process:
+- Input Files: Stego BMP image, Output file name (without extension)
+- Steps: Skip BMP header, Extract & verify magic string, Extract extension length & extension, Extract secret file size, Reconstruct secret file.
+- Result: The original secret file is successfully retrieved.
+
+4. Implementation Details
+- Programming Language: C
+- Key Concepts Used: Bitwise operations (&, |, <<, >>), File handling, Structures, String operations
+- Header Files: encode.h, decode.h, types.h
+- Modules: Encoding module, Decoding module, Utility module
+
+Execution Process:
+1.Encoding
+./a.out -e beautiful.bmp secret.txt 
+You have choosen encoding
+.bmp is present
+Secret file with extension '.txt' is present
+No stego image name provided, provide a name without extension
+new
+Enter a magic string (max 19 chars): #*
+Magic string is stored
+Image capacity is sufficient.
+Header is successfully stored
+Magic string length is stored successfully
+Magic string is stored successfully
+Secret file extension length is stored successfully
+Secret file extension is successfully stored
+Secret file size is successfully stored
+Secret file data successfully stored.
+Copy remaining image data is successfully stored
+
+Encoding is successfully done....
+
+2.Decoding
+./a.out -d new.bmp output
+You have choosen decoding
+.bmp is present
+Skipping header successfully
+Magic string length is successfully decoded
+Magic string is successfully decoded
+
+Enter the magic string used during encoding: #*
+Magic string verified. Proceeding with decoding
+Secret file extension length is successfully decoded
+Secret file extension is successfully decoded
+Secret file size is successfully decoded
+Decoded output file opened successfully.
+Secret file data successfully decoded.
+
+Decoding is successfully done....
